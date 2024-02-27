@@ -1,0 +1,15 @@
+<!-- views/register.ejs -->
+
+<h1>Registro de Usuario</h1>
+
+<form action="/register" method="post">
+  <label for="username">Usuario:</label>
+  <input type="text" id="username" name="username" required>
+
+  <label for="password">Constraseña:</label>
+  <input type="password" id="password" name="password" required>
+
+  <button type="submit">Register</button>
+</form>
+
+<p>¿Ya tienes una cuenta? <a href="/login">Entra aquí</a>.</p>
