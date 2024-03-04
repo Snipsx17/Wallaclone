@@ -1,15 +1,28 @@
-<!-- views/register.ejs -->
-
 <h1>Registro de Usuario</h1>
 
+<% if (typeof errorUser !== 'undefined') { %>
+  <p style="color:red;"><%= errorUser %></p>
+<% } %>
+
+<% if (typeof errorMail !== 'undefined') { %>
+  <p style="color:red;"><%= errorMail %></p>
+<% } %>
+
 <form action="/register" method="post">
-  <label for="username">Usuario:</label>
+  <label for="username">User:</label>
   <input type="text" id="username" name="username" required>
 
-  <label for="password">Constraseña:</label>
+  <label for="email">Email:</label>
+  <input type="text" id="email" name="email" required>
+
+  <label for="password">Password:</label>
   <input type="password" id="password" name="password" required>
+
+
+  <label for="confirmPassword">Confrim Password:</label>
+  <input type="password" id="confirmPassword" name="confirmPassword" required>
 
   <button type="submit">Register</button>
 </form>
 
-<p>¿Ya tienes una cuenta? <a href="/login">Entra aquí</a>.</p>
+<p>¿Ya tienes una cuenta? <a href="./login">Entra aquí</a>.</p>
