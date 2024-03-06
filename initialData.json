@@ -1,0 +1,28 @@
+{
+    "adverts": [
+      {
+        "name": "Bicicleta",
+        "description": "bicicleta de montaña",
+        "price": 230,
+        "status": true,
+        "imagen": "/images/anuncios/bici.jpg",
+        "tags": ["lifestyle", "motor"]
+      },{
+        "name": "Mercedes Benz",
+        "description": "modelo clase S AMG",
+        "price": 300000,
+        "status": true,
+        "imagen": "/images/anuncios/bici.jpg",
+        "tags": ["motor"]
+      },{
+        "name": "Iphone 15",
+        "description": "Completamente nuevo",
+        "price": 1500,
+        "status": false,
+        "imagen": "/images/anuncios/bici.jpg",
+        "tags": ["technology", "phone"]
+      }
+    ], 
+    "tags": ["motor", "lifestyle", "photo", "phone", "technology", "house", "fashion", "real-estate", "sports", "books", "games", "baby", "toys", "audio", "tv", "services", "others"]
+  }
+  
