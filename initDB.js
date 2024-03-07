@@ -9,7 +9,7 @@ const Tag = require("./models/tag");
 loadData();
 
 async function loadData() {
-    await new Promise((resolve) => dbConnection.once('open', resolve));
+  await new Promise((resolve) => dbConnection.once("open", resolve));
 
   const confirmDeletion = await confirmDelete(
     "You will delete the entire DB, do you want to continue? (Y/N)"
