@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').config()
 var createError = require('http-errors');
 const express = require('express');
 var path = require('path');
@@ -11,11 +12,12 @@ const app = express();
 const mongoose = require('mongoose');
 const connectDatabase = require('./lib/connect-mongoose');
 const errorhandler = require('errorhandler');
-require('dotenv').config()
+const AdvertController = require('./controllers/AdvertController');
 const validateToken = require('./middleware/validatetoken');
 
 const passportconfig = require('./config/passport-config');
 const User = require('./models/user');
+const fileUpload = require("express-fileupload");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -23,11 +25,9 @@ var usersRouter = require('./routes/users');
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
 
+const TagsController=require('./controllers/TagsController');
+
 passportconfig();
-
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,12 +38,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(fileUpload());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
+
+//instances 
+const advertController = new AdvertController();
+const tagsController = new TagsController();
+
+app.get('/api/adverts', advertController.get);
+app.get('/api/id/:id', advertController.getById);
+app.post('/api/advert/new', advertController.post);
+app.delete('/api/advert/:id', advertController.delete);
+app.put('/api/advert/:id', advertController.put);
+app.get('/api/tags', tagsController.get);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
