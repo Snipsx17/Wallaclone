@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 router.use(express.urlencoded({ extended: true }));
 
@@ -22,7 +23,8 @@ router.post('/', async function(req, res, next) {
     if (user && await bcrypt.compare(password, user.password)) {
       console.log('User successfully logged in.');
 
-      const token = jwt.sign({ userId: user._id, username: user.username}, procces.env.JWT_SECRET, {expiresIn: '1h'});
+      const token = jwt.sign({ userId: user._id, username: user.username}, process.env.JWT_SECRET, {expiresIn: '1h'});
+      res.status(200).json({ success:true, token});
 
       // Redirect to the main page successful login
       res.redirect('/');

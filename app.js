@@ -12,6 +12,7 @@ const mongoose = require('mongoose');
 const connectDatabase = require('./lib/connect-mongoose');
 const errorhandler = require('errorhandler');
 require('dotenv').config()
+const validateToken = require('./middleware/validatetoken');
 
 const passportconfig = require('./config/passport-config');
 const User = require('./models/user');
@@ -23,6 +24,8 @@ const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
 
 passportconfig();
+
+
 
 
 
