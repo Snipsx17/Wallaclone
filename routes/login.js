@@ -23,13 +23,10 @@ router.post('/', async function(req, res, next) {
     if (user && await bcrypt.compare(password, user.password)) {
       console.log('User successfully logged in.');
 
-      const token = jwt.sign({ userId: user._id, username: user.username}, process.env.JWT_SECRET, {expiresIn: '1h'});
-
-      //CODIGO TEMPORAL, RETORNA EL TOKEN
+      const token = jwt.sign({ userId: user._id, username: user.username}, process.env.JWT_SECRET, {expiresIn: '48h'});
+      
       res.json({token});
-
-      // Redirect to the main page successful login
-      //res.redirect('/');
+      
     } else {
       console.log('Invalid username or password.');
       const errorMessage = 'Invalid username or password.';

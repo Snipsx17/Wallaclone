@@ -13,6 +13,8 @@ const mongoose = require('mongoose');
 const connectDatabase = require('./lib/connect-mongoose');
 const errorhandler = require('errorhandler');
 const AdvertController = require('./controllers/AdvertController');
+const validateToken = require('./middleware/validatetoken');
+
 const passportconfig = require('./config/passport-config');
 const User = require('./models/user');
 const fileUpload = require("express-fileupload");
@@ -22,6 +24,7 @@ var usersRouter = require('./routes/users');
 
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
+
 const TagsController=require('./controllers/TagsController');
 
 passportconfig();
