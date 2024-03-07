@@ -22,6 +22,7 @@ var usersRouter = require('./routes/users');
 
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
+const TagsController=require('./controllers/TagsController');
 
 passportconfig();
 
@@ -44,12 +45,14 @@ app.use('/login', loginRouter);
 
 //instances 
 const advertController = new AdvertController();
+const tagsController = new TagsController();
 
 app.get('/api/adverts', advertController.get);
 app.get('/api/id/:id', advertController.getById);
 app.post('/api/advert/new', advertController.post);
 app.delete('/api/advert/:id', advertController.delete);
 app.put('/api/advert/:id', advertController.put);
+app.get('/api/tags', tagsController.get);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

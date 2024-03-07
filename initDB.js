@@ -4,7 +4,7 @@ const initData = require("./initialData.json");
 
 const dbConnection = require("./lib/connect-mongoose");
 const Advert = require("./models/advert");
-const { resolve } = require("node:path");
+const Tag = require("./models/tag");
 
 loadData();
 
@@ -20,7 +20,16 @@ async function loadData() {
   }
 
   await initAdverts();
+  await initTags();
   dbConnection.close();
+}
+
+async function initTags() {
+  const deleted = await Tag.deleteMany();
+  console.log(`${deleted.deletedCount} tags were deleted`);
+
+  const inserted = await Tag.insertMany(initData.tags);
+  console.log(`${inserted.length} tags created.`);
 }
 
 async function initAdverts() {
