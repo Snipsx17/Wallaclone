@@ -46,6 +46,7 @@ class AdvertController {
     const data = req.body;
     const image = req.files.image;
     const imageName = `${generateId()}.${image.mimetype.split("/")[1]}`;
+  
 
     const bucketParams = {
       Bucket: process.env.AWS_S3_BUCKET_NAME,
