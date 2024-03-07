@@ -10,6 +10,9 @@ const session = require('express-session');
 const app = express();
 const mongoose = require('mongoose');
 const connectDatabase = require('./lib/connect-mongoose');
+const errorhandler = require('errorhandler');
+require('dotenv').config()
+const validateToken = require('./middleware/validatetoken');
 
 const passportconfig = require('./config/passport-config');
 const User = require('./models/user');
@@ -18,8 +21,11 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
 
 passportconfig();
+
+
 
 
 
@@ -37,7 +43,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use('/register', registerRouter);
-
+app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
