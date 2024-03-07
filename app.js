@@ -46,6 +46,9 @@ app.use('/users', usersRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 
+//Token to validate the user
+app.use('/api/advert', validateToken);
+
 //instances 
 const advertController = new AdvertController();
 const tagsController = new TagsController();
