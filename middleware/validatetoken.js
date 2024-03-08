@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const {JWT_SECRET} = process.env;
 
 function JsonResponse(res, status, message) {
-    res.status(statuscode).json({error: {code: statusCode, message} });
+    res.status(status).json({error: {code: status, message} });
 }
 
 function validateToken(req, res, next) {
