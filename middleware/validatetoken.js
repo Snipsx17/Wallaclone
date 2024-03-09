@@ -8,8 +8,10 @@ function JsonResponse(res, status, message) {
 }
 
 function validateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
+    const authHeader = req.get('Authorization');
     const token = authHeader && authHeader.split(' ')[1];
+    //const authHeader = req.get('Access-Token');
+    //const token = authHeader
 
     if(!token) {
         return JsonResponse(res, 401, 'Unauthorized - Token not provided');
