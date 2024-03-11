@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-mongoose.connection.on('connected', () => {
-    console.log('Connected to MongoDB');
-});
+// mongoose.connection.on('connected', () => {
+//     console.log('Connected to MongoDB');
+// });
 
 const userSchema = new mongoose.Schema({
     username: {type: String, required: true},
