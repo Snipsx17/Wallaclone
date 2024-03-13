@@ -74,16 +74,24 @@ class AdvertController {
 
   async delete(req, res, next) {
     const advertId = req.params.id;
-    const advert = Advert.findById(advertId);
-
-    if (!advert) {
-      next(createError(404, "Advert not found"));
-      return;
-    }
-
-    // falta comprobar si es el propietario del anuncion
+    const userId = req.userId.userId;
 
     try {
+      const advert = await Advert.findById(advertId);
+
+      if (!advert) {
+        next(createError(404, "Advert not found"));
+        return;
+      }
+
+      if (String(advert.owner) !== userId) {
+        console.warn(
+          `user ${userId} try to delete the advert ${advertId} without being the owner`
+        );
+        next(createError(401, "Error deleting advert"));
+        return;
+      }
+
       await Advert.deleteOne({ _id: advertId });
       res.json({ message: "Advert deleted" });
     } catch (error) {
@@ -92,12 +100,27 @@ class AdvertController {
   }
 
   async put(req, res, next) {
-    const filter = { _id: req.params.id };
+    const advertId = req.params.id;
+    const userId = req.userId.userId;
+    const filter = { _id: advertId };
     const update = req.body;
 
-    // falta comprobar que el usuario sea el due;o del anuncio
-
     try {
+      const advert = await Advert.findById(advertId);
+
+      if (!advert) {
+        next(createError(404, "Advert not found"));
+        return;
+      }
+
+      if (String(advert.owner) !== userId) {
+        console.warn(
+          `user ${userId} try to update the advert ${advertId} without being the owner`
+        );
+        next(createError(401, "Error updating advert" ));
+        return;
+      }
+
       const advertUpdated = await Advert.findOneAndUpdate(filter, update, {
         new: true,
       });

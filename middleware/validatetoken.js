@@ -22,7 +22,7 @@ function validateToken(req, res, next) {
             return JsonResponse(res, 403, 'Forbidden - Invalid token');
         }
 
-        req.id = id;
+        req.userId = id;
         next();
     });
 };
