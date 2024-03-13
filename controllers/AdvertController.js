@@ -45,6 +45,7 @@ class AdvertController {
   async post(req, res, next) {
     try {
       const data = req.body;
+      data.owner = req.userId.userId;
 
       if (req.files) {
         const image = req.files.image;
@@ -59,7 +60,7 @@ class AdvertController {
         //generate URL
         data.image = `https://images-wallaclone.s3.amazonaws.com/${imageName}`;
       } else {
-        data.image = null;
+        data.image = process.env.PATH_PRODUCT_IMAGE_PLACEHOLDER;
       }
 
       // create advert
