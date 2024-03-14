@@ -1,8 +1,6 @@
-const { PutObjectCommand } = require("@aws-sdk/client-s3");
 const Advert = require("../models/advert");
 const createError = require("http-errors");
-const s3Client = require("../lib/awsS3Config");
-const { v4: generateId } = require("uuid");
+const uploadImageToS3 = require('../lib/uploadImageToS3');
 
 class AdvertController {
   async get(req, res, next) {
@@ -47,18 +45,9 @@ class AdvertController {
       const data = req.body;
       data.owner = req.userId.userId;
 
-      if (req.files) {
-        const image = req.files.image;
-        const imageName = `${generateId()}.${image.mimetype.split("/")[1]}`;
-        const bucketParams = {
-          Bucket: process.env.AWS_S3_BUCKET_NAME,
-          Key: imageName,
-          Body: image.data,
-        };
-        //save images on S3
-        await s3Client.send(new PutObjectCommand(bucketParams));
-        //generate URL
-        data.image = `https://images-wallaclone.s3.amazonaws.com/${imageName}`;
+      if (req.file) {
+        const imagePathS3 = await uploadImageToS3(req.file);
+        data.image = imagePathS3
       } else {
         data.image = process.env.PATH_PRODUCT_IMAGE_PLACEHOLDER;
       }
