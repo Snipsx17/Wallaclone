@@ -8,12 +8,6 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const app = express();
-const cors = require('cors');
-
-
-//CONFIG CORS
-
-app.use(cors());
 
 // CONFIG
 const passportconfig = require("./config/passport-config");
@@ -42,11 +36,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
+
+// CORS Middleware
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); // Replace '*' with frontend's domain
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
+});
+
+// Handle preflight requests
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Add any additional headers needed
+  res.status(200).send();
 });
 
 //=========== CONTROLLERS INSTANCES =============
