@@ -6,8 +6,6 @@ class RegisterController {
     //Recieve the user registration petition
     try {
       const { username, email, password, confirmPassword } = req.body;
-      //console.log('Received registration request for username:', username);
-
       //Check if passwords match
       if (password !== confirmPassword) {
         const errorPassword =

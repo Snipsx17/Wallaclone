@@ -8,7 +8,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const app = express();
-const multer  = require('multer')
+const multer  = require('multer');
 
 // CONFIG
 const passportconfig = require("./config/passport-config");
@@ -17,20 +17,6 @@ passportconfig();
 
 // MIDDELWARE
 const validateToken = require("./middleware/validatetoken");
-
-// CORS
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
-
-app.options('*', (req, res) => {
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.status(200).send();
-});
 
 // CONTROLLERS
 const AdvertController = require("./controllers/AdvertController");
@@ -49,11 +35,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+// CORS
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); // Replace '*' with frontend's domain
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
+});
+
+app.options('*', (req, res) => {
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.status(200).send();
 });
 
 //=========== CONTROLLERS INSTANCES =============
