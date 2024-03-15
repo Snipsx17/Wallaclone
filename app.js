@@ -8,10 +8,11 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const app = express();
+const multer  = require('multer');
 
 // CONFIG
 const passportconfig = require("./config/passport-config");
-const fileUpload = require("express-fileupload");
+const upload = multer({ dest: 'uploads/' })
 passportconfig();
 
 // MIDDELWARE
@@ -29,15 +30,13 @@ require("./lib/connect-mongoose");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(fileUpload());
 
-// CORS Middleware
+// CORS
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); // Replace '*' with frontend's domain
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -45,10 +44,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// Handle preflight requests
 app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Add any additional headers needed
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.status(200).send();
 });
 
@@ -66,7 +64,7 @@ app.post("/api/login", loginController.login);
 // ADVERTS
 app.get("/api/adverts", advertController.get);
 app.get("/api/advert/id/:id", advertController.getById);
-app.post("/api/advert/new", validateToken, advertController.post);
+app.post("/api/advert/new", validateToken, upload.single('image'), advertController.post);
 app.delete("/api/advert/:id", validateToken, advertController.delete);
 app.put("/api/advert/:id", validateToken, advertController.put);
 // TAGS
