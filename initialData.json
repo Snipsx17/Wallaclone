@@ -5,7 +5,8 @@
       "description": "bicicleta de montaña",
       "price": 230,
       "status": true,
-      "image": "/images/anuncios/bici.jpg",
+      "image": "https://images-wallaclone.s3.amazonaws.com/placeholder/placeholder.webp",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/placeholder/placeholder-thumbnail.webp",
       "tags": ["lifestyle", "motor"]
     },
     {
@@ -13,7 +14,8 @@
       "description": "modelo clase S AMG",
       "price": 300000,
       "status": true,
-      "image": "/images/anuncios/bici.jpg",
+      "image": "https://images-wallaclone.s3.amazonaws.com/placeholder/placeholder.webp",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/placeholder/placeholder-thumbnail.webp",
       "tags": ["motor"]
     },
     {
@@ -21,7 +23,8 @@
       "description": "Completamente nuevo",
       "price": 1500,
       "status": false,
-      "image": "/images/anuncios/bici.jpg",
+      "image": "https://images-wallaclone.s3.amazonaws.com/placeholder/placeholder.webp",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/placeholder/placeholder-thumbnail.webp",
       "tags": ["technology", "phone"]
     }
   ],
