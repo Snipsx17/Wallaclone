@@ -1,6 +1,6 @@
 const Advert = require("../models/advert");
 const createError = require("http-errors");
-const uploadImageToS3 = require('../lib/uploadImageToS3');
+const uploadImagesToS3 = require('../lib/uploadImageToS3');
 
 class AdvertController {
   async get(req, res, next) {
@@ -46,9 +46,11 @@ class AdvertController {
       data.owner = req.userId.userId;
 
       if (req.file) {
-        const imagePathS3 = await uploadImageToS3(req.file);
-        data.image = imagePathS3
+        const { uriImageThumbnail, uriImageWebp } = await uploadImagesToS3(req.file);
+        data.image = uriImageWebp
+        data.thumbnail = uriImageThumbnail
       } else {
+        data.image = process.env.PATH_PRODUCT_IMAGE_PLACEHOLDER;
         data.image = process.env.PATH_PRODUCT_IMAGE_PLACEHOLDER;
       }
 

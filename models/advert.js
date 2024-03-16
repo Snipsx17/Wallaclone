@@ -7,6 +7,7 @@ const advertSchema = mongoose.Schema(
     price: { type: Number, index: true },
     status: { type: Boolean, index: true },
     image: { type: String },
+    thumbnail: { type: String },
     tags: { type: [String], index: true },
     owner: { ref: "User", type: mongoose.Schema.Types.ObjectId, index: true },
   },
