@@ -1,6 +1,9 @@
 const Advert = require("../models/advert");
+const User = require("../models/user");
 const createError = require("http-errors");
-const uploadImagesToS3 = require('../lib/uploadImageToS3');
+const uploadImagesToS3 = require("../lib/uploadImageToS3");
+("");
+const mongoose = require("mongoose");
 
 class AdvertController {
   async get(req, res, next) {
@@ -40,15 +43,33 @@ class AdvertController {
     }
   }
 
+  async getAdvertsUser(req, res, next) {
+    const userId = req.userId.userId;
+    const response = {};
+
+    try {
+      response.user = await User.findById(userId).select({ password: 0 });
+      response.adverts = await Advert.find({
+        owner: new mongoose.Types.ObjectId(userId),
+      });
+
+      res.json(response);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async post(req, res, next) {
     try {
       const data = req.body;
       data.owner = req.userId.userId;
 
       if (req.file) {
-        const { uriImageThumbnail, uriImageWebp } = await uploadImagesToS3(req.file);
-        data.image = uriImageWebp
-        data.thumbnail = uriImageThumbnail
+        const { uriImageThumbnail, uriImageWebp } = await uploadImagesToS3(
+          req.file
+        );
+        data.image = uriImageWebp;
+        data.thumbnail = uriImageThumbnail;
       } else {
         data.image = process.env.PATH_PRODUCT_IMAGE_PLACEHOLDER;
         data.image = process.env.PATH_PRODUCT_IMAGE_PLACEHOLDER;
@@ -108,7 +129,7 @@ class AdvertController {
         console.warn(
           `user ${userId} try to update the advert ${advertId} without being the owner`
         );
-        next(createError(401, "Error updating advert" ));
+        next(createError(401, "Error updating advert"));
         return;
       }
 
