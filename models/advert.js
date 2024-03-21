@@ -9,19 +9,21 @@ const advertSchema = mongoose.Schema(
     image: { type: String },
     thumbnail: { type: String },
     tags: { type: [String], index: true },
+    date: { type: Date, index: true},
     owner: { ref: "User", type: mongoose.Schema.Types.ObjectId, index: true },
   },
   {
     collection: "adverts",
+    timestamps: true,
   }
 );
 
-advertSchema.statics.list = function (name, fields, skip, limit, sort) {
-  const query = Advert.find(name);
+advertSchema.statics.list = function (filter, fields, skip, limit, sort) {
+  const query = Advert.find(filter);
+  query.select(fields);
   query.skip(skip);
   query.limit(limit);
   query.sort(sort);
-  query.select(fields);
   return query.exec();
 };
 

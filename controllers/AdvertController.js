@@ -8,21 +8,18 @@ const mongoose = require("mongoose");
 class AdvertController {
   async get(req, res, next) {
     try {
-      const nameFilter = req.query.name;
-      const statusFilter = req.query.status;
-      const tagsFilter = req.query.tags;
+      const name = req.query.name;
+      const description = req.query.description;
+      const status = req.query.status;
+      const tags = req.query.tags;
       const skip = req.query.skip;
       const limit = req.query.limit;
       const sort = req.query.sort;
       const fields = req.query.fields;
 
-      const filter = {};
+      const filter = getFilter(name, description, status, tags);
 
-      if (nameFilter) filter.name = new RegExp("^" + nameFilter, "i");
-      if (statusFilter) filter.status = statusFilter;
-      if (tagsFilter) filter.tags = tagsFilter;
-
-      const adverts = await Advert.list(filter, skip, limit, sort, fields);
+      const adverts = await Advert.list(filter, fields, skip, limit, sort);
       res.json(adverts);
     } catch (error) {
       next(error);
@@ -142,5 +139,24 @@ class AdvertController {
     }
   }
 }
+
+const getFilter = (name, description, status, tags) => {
+  const filter = {};
+
+  if (name && description) {
+    filter.$or = [
+      { name: new RegExp("^" + name, "i") },
+      { description: new RegExp("^" + description, "i") },
+    ];
+  } else {
+    if (name) filter.name = new RegExp("^" + name, "i");
+    if (description) filter.description = new RegExp("^" + description, "i");
+  }
+
+  if (status) filter.status = status;
+  if (tags) filter.tags = tags;
+
+  return filter;
+};
 
 module.exports = AdvertController;
