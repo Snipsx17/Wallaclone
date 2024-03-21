@@ -294,8 +294,8 @@
     {
       "username": "admin",
       "email": "admin@admin.com",
-      "password": "yosoyeladmin"
+      "password": "Y0soyeladmin!"
     },
-    { "username": "user", "email": "user@user.com", "password": "yosoyeluser" }
+    { "username": "user", "email": "user@user.com", "password": "Y0soyeluser!" }
   ]
 }
