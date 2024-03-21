@@ -1,31 +1,274 @@
 {
   "adverts": [
     {
-      "name": "Bicicleta",
-      "description": "bicicleta de montaña",
-      "price": 230,
+      "name": "name 1",
+      "description": "description 1",
+      "price": 430,
       "status": true,
-      "image": "https://images-wallaclone.s3.amazonaws.com/placeholder/placeholder.webp",
-      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/placeholder/placeholder-thumbnail.webp",
-      "tags": ["lifestyle", "motor"]
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/1.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail1.webp",
+      "tags": ["phone", "technology"]
     },
     {
-      "name": "Mercedes Benz",
-      "description": "modelo clase S AMG",
-      "price": 300000,
+      "name": "name 2",
+      "description": "description 2",
+      "price": 4400,
       "status": true,
-      "image": "https://images-wallaclone.s3.amazonaws.com/placeholder/placeholder.webp",
-      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/placeholder/placeholder-thumbnail.webp",
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/2.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail2.webp",
+      "tags": ["technology"]
+    },
+    {
+      "name": "name 3",
+      "description": "description 3",
+      "price": 95,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/3.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail3.webp",
+      "tags": ["phone"]
+    },
+    {
+      "name": "name 4",
+      "description": "description 4",
+      "price": 610,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/4.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail4.webp",
+      "tags": ["motor", "car"]
+    },
+    {
+      "name": "name 5",
+      "description": "description 5",
+      "price": 26000,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/5.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail5.webp",
       "tags": ["motor"]
     },
     {
-      "name": "Iphone 15",
-      "description": "Completamente nuevo",
-      "price": 1500,
+      "name": "name 6",
+      "description": "description 6",
+      "price": 619,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/6.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail6.webp",
+      "tags": ["car"]
+    },
+    {
+      "name": "name 7",
+      "description": "description 7",
+      "price": 900,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/7.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail7.webp",
+      "tags": ["technology", "computer"]
+    },
+    {
+      "name": "name 8",
+      "description": "description 8",
+      "price": 7200,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/8.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail8.webp",
+      "tags": ["laptop", "technology"]
+    },
+    {
+      "name": "name 9",
+      "description": "description 9",
+      "price": 890,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/9.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail9.webp",
+      "tags": ["computer"]
+    },
+    {
+      "name": "name 10",
+      "description": "description 10",
+      "price": 9100,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/10.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail10.webp",
+      "tags": ["shoes", "live", "fashion"]
+    },
+    {
+      "name": "name 11",
+      "description": "description 11",
+      "price": 910,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/11.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail11.webp",
+      "tags": ["shoes"]
+    },
+    {
+      "name": "name 12",
+      "description": "description 12",
+      "price": 7500,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/12.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail12.webp",
+      "tags": ["fashion", "shoes"]
+    },
+    {
+      "name": "name 13",
+      "description": "description 13",
+      "price": 200,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/13.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail13.webp",
+      "tags": ["home", "house"]
+    },
+    {
+      "name": "name 14",
+      "description": "description 14",
+      "price": 50000,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/14.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail14.webp",
+      "tags": ["real-state"]
+    },
+    {
+      "name": "name 15",
+      "description": "description 15",
+      "price": 760,
+      "status": true,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/15.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail15.webp",
+      "tags": ["house", "real-state"]
+    },
+    {
+      "name": "name 16",
+      "description": "description 16",
+      "price": 5700,
       "status": false,
-      "image": "https://images-wallaclone.s3.amazonaws.com/placeholder/placeholder.webp",
-      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/placeholder/placeholder-thumbnail.webp",
-      "tags": ["technology", "phone"]
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/16.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail16.webp",
+      "tags": ["living"]
+    },
+    {
+      "name": "name 17",
+      "description": "description 17",
+      "price": 86000,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/17.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail17.webp",
+      "tags": ["others"]
+    },
+    {
+      "name": "name 18",
+      "description": "description 18",
+      "price": 2800,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/18.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail18.webp",
+      "tags": ["house", "forniture"]
+    },
+    {
+      "name": "name 19",
+      "description": "description 19",
+      "price": 500,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/19.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail19.webp",
+      "tags": ["toys"]
+    },
+    {
+      "name": "name 20",
+      "description": "description 20",
+      "price": 6200,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/20.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail20.webp",
+      "tags": ["baby", "toys"]
+    },
+    {
+      "name": "name 21",
+      "description": "description 21",
+      "price": 510,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/21.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail21.webp",
+      "tags": ["toys"]
+    },
+    {
+      "name": "name 22",
+      "description": "description 22",
+      "price": 280,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/22.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail22.webp",
+      "tags": ["bike", "sport"]
+    },
+    {
+      "name": "name 23",
+      "description": "description 23",
+      "price": 40,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/23.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail23.webp",
+      "tags": ["motor", "bike"]
+    },
+    {
+      "name": "name 24",
+      "description": "description 24",
+      "price": 5700,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/24.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail24.webp",
+      "tags": ["sport"]
+    },
+    {
+      "name": "name 25",
+      "description": "description 25",
+      "price": 240,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/25.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail25.webp",
+      "tags": ["fashion"]
+    },
+    {
+      "name": "name 26",
+      "description": "description 26",
+      "price": 9200,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/26.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail26.webp",
+      "tags": ["clothes"]
+    },
+    {
+      "name": "name 27",
+      "description": "description 27",
+      "price": 580,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/27.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail27.webp",
+      "tags": ["fashion"]
+    },
+    {
+      "name": "name 28",
+      "description": "description 28",
+      "price": 70,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/28.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail28.webp",
+      "tags": ["camera", "photo"]
+    },
+    {
+      "name": "name 29",
+      "description": "description 29",
+      "price": 1600,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/29.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail29.webp",
+      "tags": ["photo"]
+    },
+    {
+      "name": "name 30",
+      "description": "description 30",
+      "price": 780,
+      "status": false,
+      "image": "https://images-wallaclone.s3.amazonaws.com/product_images/30.avif",
+      "thumbnail": "https://images-wallaclone.s3.amazonaws.com/product_images/thumbnail/thumbnail30.webp",
+      "tags": ["camera", "photo"]
     }
   ],
   "tags": [
@@ -46,5 +289,13 @@
     { "tag": "tv" },
     { "tag": "services" },
     { "tag": "others" }
+  ],
+  "users": [
+    {
+      "username": "admin",
+      "email": "admin@admin.com",
+      "password": "yosoyeladmin"
+    },
+    { "username": "user", "email": "user@user.com", "password": "yosoyeluser" }
   ]
 }
