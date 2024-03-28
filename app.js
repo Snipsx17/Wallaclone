@@ -9,6 +9,8 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const app = express();
 const multer = require("multer");
+const handlePasswordReset = require("./microservices/emailsender");
+
 
 // CONFIG
 const passportconfig = require("./config/passport-config");
@@ -61,6 +63,8 @@ const loginController = new LoginController();
 app.post("/api/register", registerController.create);
 // LOGIN
 app.post("/api/login", loginController.login);
+//Password reset
+
 // ADVERTS
 app.get("/api/adverts", advertController.get);
 app.get("/api/adverts-user", validateToken, advertController.getAdvertsUser);
@@ -75,7 +79,8 @@ app.delete("/api/advert/:id", validateToken, advertController.delete);
 app.put("/api/advert/:id", validateToken, advertController.put);
 // TAGS
 app.get("/api/tags", validateToken, tagsController.get);
-
+//Password Recovery
+app.post('/api/passwordreset', handlePasswordReset);
 //=========== CATCH 404 =============
 app.use(function (req, res, next) {
   next(createError(404));
