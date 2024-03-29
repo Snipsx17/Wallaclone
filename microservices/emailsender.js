@@ -6,8 +6,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const TOKEN = "1ca74ad981b78ec04b511ee8f1af0bf2";
-const ENDPOINT = "https://send.api.mailtrap.io/";
+
 
 const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
 
