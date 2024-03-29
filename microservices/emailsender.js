@@ -3,6 +3,8 @@
 const { MailtrapClient } = require("mailtrap");
 const User = require('../models/user');
 const fs = require('fs');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const TOKEN = "1ca74ad981b78ec04b511ee8f1af0bf2";
 const ENDPOINT = "https://send.api.mailtrap.io/";
@@ -14,9 +16,14 @@ const sender = {
   name: "Password Recovery",
 };
 
-function handlePasswordReset(req, res) {
+function generateToken(email) {
+  const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  return token;
+}
+
+function PasswordResetRequest(req, res) {
   const email = req.body.email;
-  console.log('Received password reset request from:', email);  
+  console.log('Received password reset request from:', email);
 
   User.findOne({ email })
     .then(existingUser => {
@@ -26,35 +33,47 @@ function handlePasswordReset(req, res) {
         console.log(errorMail);
         res.status(400).json({ error: errorMail });
       } else {
-        const recipients = email;
+        const token = generateToken(email);
 
-        fs.readFile('./views/passwordreset.html', 'utf8', (err, data) => {
-          if (err) {
-            console.error('Error reading HTML template:', err);
-            res.status(500).json({error: 'Internal server error'});
-            return;
-          }
-        
-        
-        const htmlContent = data.replace('{{user_email}}', email).replace('{{pass_reset_link}}')
+        existingUser.resetToken = token;
+        existingUser.resetTokenExpires = Date.now() + 3600000;
 
-        //Send email
-        client.send({
-          from: sender,
-          to: [{email: recipients}],
-          subject: "Password Reset",
-          html: htmlContent,
-          category: 'Password Reset'
-        })
-        .then(() => {
-          console.log("Email sent successfully!");
-          res.status(200).json({ message: "Password recovery email sent successfully!" });
-        })
-        .catch(err => {
-          console.error("Error sending email:", err);
-          res.status(500).json({ error: "Internal server error" });
-        });
-        });
+        existingUser.save()
+          .then(() => {
+            const resetLink = `http://127.0.0.1:3000/api/passwordreset/${token}`;
+            const recipients = email;
+
+            fs.readFile('./views/passwordresetmail.html', 'utf8', (err, data) => {
+              if (err) {
+                console.error('Error reading HTML template:', err);
+                res.status(500).json({ error: 'Internal server error' });
+                return;
+              }
+
+              const htmlContent = data.replace('{{user_email}}', email).replace('{{pass_reset_link}}', resetLink);
+
+              //Send email
+              client.send({
+                from: sender,
+                to: [{ email: recipients }],
+                subject: "Password Reset",
+                html: htmlContent,
+                category: 'Password Reset'
+              })
+                .then(() => {
+                  console.log("Email sent successfully!");
+                  res.status(200).json({ message: "Password recovery email sent successfully!" });
+                })
+                .catch(err => {
+                  console.error("Error sending email:", err);
+                  res.status(500).json({ error: "Internal server error" });
+                });
+            });
+          })
+          .catch(err => {
+            console.error("Error saving user:", err);
+            res.status(500).json({ error: "Internal server error" });
+          });
       }
     })
     .catch(err => {
@@ -63,4 +82,4 @@ function handlePasswordReset(req, res) {
     });
 }
 
-module.exports = handlePasswordReset;
+module.exports = PasswordResetRequest;
