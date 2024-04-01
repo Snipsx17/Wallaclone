@@ -6,7 +6,8 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-
+const TOKEN = process.env.TOKEN;
+const ENDPOINT = process.env.ENDPOINT;
 
 const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
 
@@ -45,7 +46,7 @@ function PasswordResetRequest(req, res) {
             fs.readFile('./views/passwordresetmail.html', 'utf8', (err, data) => {
               if (err) {
                 console.error('Error reading HTML template:', err);
-                res.status(500).json({ error: 'Internal server error' });
+                res.status(500).json({ error: 'Cannot read HTML template' });
                 return;
               }
 
@@ -65,19 +66,19 @@ function PasswordResetRequest(req, res) {
                 })
                 .catch(err => {
                   console.error("Error sending email:", err);
-                  res.status(500).json({ error: "Internal server error" });
+                  res.status(500).json({ error: "Error sending email" });
                 });
             });
           })
           .catch(err => {
             console.error("Error saving user:", err);
-            res.status(500).json({ error: "Internal server error" });
+            res.status(500).json({ error: "Error saving user" });
           });
       }
     })
     .catch(err => {
       console.error("Error finding user:", err);
-      res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: "Error finding user" });
     });
 }
 

@@ -65,7 +65,8 @@ app.post("/api/register", registerController.create);
 // LOGIN
 app.post("/api/login", loginController.login);
 //Password Reset
-
+app.post('/api/passwordresetrequest', PasswordResetRequest);
+app.post('/api/passwordreset/:token', Passwordreset);
 // ADVERTS
 app.get("/api/adverts", advertController.get);
 app.get("/api/adverts-user", validateToken, advertController.getAdvertsUser);
@@ -80,9 +81,6 @@ app.delete("/api/advert/:id", validateToken, advertController.delete);
 app.put("/api/advert/:id", validateToken, advertController.put);
 // TAGS
 app.get("/api/tags", validateToken, tagsController.get);
-//Password Recovery Request
-app.post('/api/passwordresetrequest', PasswordResetRequest);
-app.post('/api/passwordreset/:token', Passwordreset);
 //=========== CATCH 404 =============
 app.use(function (req, res, next) {
   next(createError(404));
