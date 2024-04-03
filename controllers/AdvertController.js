@@ -145,12 +145,12 @@ const getFilter = (name, description, status, tags) => {
 
   if (name && description) {
     filter.$or = [
-      { name: new RegExp("^" + name, "i") },
-      { description: new RegExp("^" + description, "i") },
+      { name: new RegExp( name, "i") },
+      { description: new RegExp(description, "i") },
     ];
   } else {
-    if (name) filter.name = new RegExp("^" + name, "i");
-    if (description) filter.description = new RegExp("^" + description, "i");
+    if (name) filter.name = new RegExp(name, "i");
+    if (description) filter.description = new RegExp(description, "i");
   }
 
   if (status) filter.status = status;
