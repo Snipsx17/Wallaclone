@@ -23,10 +23,8 @@ const validateToken = require("./middleware/validatetoken");
 
 // CONTROLLERS
 const AdvertController = require("./controllers/AdvertController");
-const RegisterController = require("./controllers/RegisterController");
-const LoginController = require("./controllers/LoginController");
-const TagsController = require("./controllers/TagsController");
 const UserController = require("./controllers/UserController");
+const TagsController = require("./controllers/TagsController");
 
 // DB CONNECTION
 require("./lib/connect-mongoose");
@@ -57,14 +55,13 @@ app.options("*", (req, res) => {
 //=========== CONTROLLERS INSTANCES =============
 const advertController = new AdvertController();
 const tagsController = new TagsController();
-const registerController = new RegisterController();
-const loginController = new LoginController();
 const userController = new UserController();
 
 //=========== ROUTER =============
 // USER
 app.post("/api/register", userController.create);
 app.post("/api/login", userController.login);
+app.get("/api/get-user", userController.getUser);
 app.get("/api/get-user/:userId", userController.getUser);
 //Password Reset
 app.post('/api/passwordresetrequest', PasswordResetRequest);
