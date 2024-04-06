@@ -69,7 +69,7 @@ class AdvertController {
         data.thumbnail = uriImageThumbnail;
       } else {
         data.image = process.env.PATH_PRODUCT_IMAGE_PLACEHOLDER;
-        data.image = process.env.PATH_PRODUCT_IMAGE_PLACEHOLDER;
+        data.thumbnail = process.env.PATH_PRODUCT_IMAGE_THUMBNAIL_PLACEHOLDER;
       }
 
       // create advert
