@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require("../models/user");
 const jwt = require('jsonwebtoken');
+const createError = require("http-errors");
 
 class UserController {
 
@@ -83,6 +84,23 @@ class UserController {
           const errorMessage = 'An error occurred during login. Please try again.';
           // Render an error message as a JSON
           res.status(500).json({ success: false, message: errorMessage});
+        }
+      }
+
+    async getUser(req, res, next) {
+        const id = req.params.userId;
+        try {
+            const response = await User.find({ _id: id }, 'username email').exec();
+
+            if(!response || response.length === 0 ){
+                next(createError(404, "User not found"));
+                return
+            }
+
+            res.json(response)
+
+        } catch (error) {
+            next(createError(404, "User not found"));
         }
       }
 }
