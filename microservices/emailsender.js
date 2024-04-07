@@ -12,7 +12,7 @@ const ENDPOINT = process.env.ENDPOINT;
 const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
 
 const sender = {
-  email: "mailtrap@demomailtrap.com",
+  email: "admin@coderstrikeback.es",
   name: "Password Recovery",
 };
 
