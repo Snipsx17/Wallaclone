@@ -69,7 +69,7 @@ class AdvertController {
         data.thumbnail = uriImageThumbnail;
       } else {
         data.image = process.env.PATH_PRODUCT_IMAGE_PLACEHOLDER;
-        data.image = process.env.PATH_PRODUCT_IMAGE_PLACEHOLDER;
+        data.thumbnail = process.env.PATH_PRODUCT_IMAGE_THUMBNAIL_PLACEHOLDER;
       }
 
       // create advert
@@ -145,12 +145,12 @@ const getFilter = (name, description, status, tags) => {
 
   if (name && description) {
     filter.$or = [
-      { name: new RegExp("^" + name, "i") },
-      { description: new RegExp("^" + description, "i") },
+      { name: new RegExp( "^" + name, "i") },
+      { description: new RegExp(description, "i") },
     ];
   } else {
     if (name) filter.name = new RegExp("^" + name, "i");
-    if (description) filter.description = new RegExp("^" + description, "i");
+    if (description) filter.description = new RegExp(description, "i");
   }
 
   if (status) filter.status = status;
