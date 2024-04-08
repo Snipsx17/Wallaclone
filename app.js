@@ -9,7 +9,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const app = express();
 const multer = require("multer");
-const PasswordResetRequest = require("./microservices/emailsender");
+const PasswordResetRequest = require("./microservices/passwordresetrequest");
 const Passwordreset = require("./routes/passwordreset");
 
 
