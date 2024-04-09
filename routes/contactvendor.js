@@ -37,9 +37,15 @@ router.post('/api/contactvendor', async (req, res) => {
         if (!ownerEmail) {
             return res.status(500).json({ error: 'Failed to get owner email' });
         }
-        
+
         //Predefined message
-        const message = `Hello,I'm interested in your advertisement. Please provide more details.`;
+
+        const advertLink = `http://coderstrikeback.es/api/advert/id/${advertId}`;
+        const advertName = advert.name;
+
+
+        const message = `<p>Hello, I'm interested in your advertisement <a href="${advertLink}">${advertName}</a>. Please provide more details.</p>`;
+
 
         // Email data
         const emailData = {
@@ -47,7 +53,7 @@ router.post('/api/contactvendor', async (req, res) => {
             to: [{ email: ownerEmail }],
             subject: 'Message from buyer regarding your advert',
             text: message,
-            html_body: `<p>${message}</p><p>Reply to the interested buyer: <a href="mailto:${buyerEmail}">${buyerEmail}</a></p>`,
+            html_body: `<p>${message}</p><p>You can reply directly to this email or contact the buyer through: <a href="mailto:${buyerEmail}">${buyerEmail}</a></p>`,
         };
 
         // Send email
