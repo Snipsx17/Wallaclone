@@ -40,7 +40,7 @@ router.post('/api/contactvendor', async (req, res) => {
 
         //Predefined message
 
-        const advertLink = `http://coderstrikeback.es/api/advert/id/${advertId}`;
+        const advertLink = `http://127.0.0.1:3000/api/advert/id/${advertId}`;
         const advertName = advert.name;
 
 
