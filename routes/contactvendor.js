@@ -1,14 +1,28 @@
-// Inside your router/controller file
+"use strict";
+
+require("dotenv").config();
 const express = require('express');
 const router = express.Router();
 const Advert = require('../models/advert');
 const emailService = require('../microservices/emailService');
+const jwt = require('jsonwebtoken')
+const User = require('../models/user');
 
 // Endpoint for sending emails from buyer to ad owner
 router.post('/api/contactvendor', async (req, res) => {
     try {
         // Extract data from the request body
-        const { advertId, buyerEmail} = req.body;
+        const {advertId} = req.body;
+
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const buyername = decodedToken.username;
+
+        const user = await User.findOne({ username: buyername });
+
+        const buyerEmail = user.email;
+
+        const responder = buyerEmail;
 
         // Find the advert by ID
         const advert = await Advert.findById(advertId);
@@ -23,8 +37,7 @@ router.post('/api/contactvendor', async (req, res) => {
         if (!ownerEmail) {
             return res.status(500).json({ error: 'Failed to get owner email' });
         }
-        console.log(buyerEmail);
-
+        
         //Predefined message
         const message = `Hello,I'm interested in your advertisement. Please provide more details.`;
 
@@ -34,11 +47,11 @@ router.post('/api/contactvendor', async (req, res) => {
             to: [{ email: ownerEmail }],
             subject: 'Message from buyer regarding your advert',
             text: message,
-            html_body: `<p>${message}</p><p>Reply to the interested buyer: <a href="mailto:${buyerEmail}">${buyerEmail}</a></p>`
+            html_body: `<p>${message}</p><p>Reply to the interested buyer: <a href="mailto:${buyerEmail}">${buyerEmail}</a></p>`,
         };
 
         // Send email
-        await emailService.sendEmail(emailData);
+        await emailService.sendEmail(emailData, buyerEmail);
 
         // Respond with success message
         res.status(200).json({ message: 'Email sent successfully' });
