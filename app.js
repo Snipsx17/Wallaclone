@@ -11,6 +11,7 @@ const app = express();
 const multer = require("multer");
 const PasswordResetRequest = require("./microservices/passwordresetrequest");
 const Passwordreset = require("./routes/passwordreset");
+const contactVendor = require('./routes/contactvendor')
 
 
 // CONFIG
@@ -78,6 +79,8 @@ app.post(
 );
 app.delete("/api/advert/:id", validateToken, advertController.delete);
 app.put("/api/advert/:id", validateToken, advertController.put);
+// CONTACT AD OWNER
+app.post("/api/contactvendor", validateToken, contactVendor);
 // TAGS
 app.get("/api/tags", validateToken, tagsController.get);
 //=========== CATCH 404 =============

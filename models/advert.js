@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("./user");
 
 const advertSchema = mongoose.Schema(
   {
@@ -17,6 +18,14 @@ const advertSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+advertSchema.methods.getOwnerEmail = async function() {
+  const ownerId = this.owner;
+
+  const owner = await User.findById(ownerId);
+  
+  return owner ? owner.email : null;
+};
 
 advertSchema.statics.list = function (filter, fields, skip, limit, sort) {
   const query = Advert.find(filter);
