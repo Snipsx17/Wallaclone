@@ -82,7 +82,7 @@ app.put("/api/advert/:id", validateToken, advertController.put);
 // CONTACT AD OWNER
 app.post("/api/contactvendor", validateToken, contactVendor);
 // TAGS
-app.get("/api/tags", validateToken, tagsController.get);
+app.get("/api/tags", tagsController.get);
 //=========== CATCH 404 =============
 app.use(function (req, res, next) {
   next(createError(404));
