@@ -16,8 +16,10 @@ class AdvertController {
       const limit = req.query.limit;
       const sort = req.query.sort;
       const fields = req.query.fields;
+      const priceMin = req.query.priceMin;
+      const priceMax = req.query.priceMax;
 
-      const filter = getFilter(name, description, status, tags);
+      const filter = getFilter(name, description, status, tags, priceMin, priceMax);
 
       const adverts = await Advert.list(filter, fields, skip, limit, sort);
       res.json(adverts);
@@ -140,17 +142,32 @@ class AdvertController {
   }
 }
 
-const getFilter = (name, description, status, tags) => {
+const getFilter = (name, description, status, tags, priceMin, priceMax) => {
   const filter = {};
 
   if (name && description) {
     filter.$or = [
-      { name: new RegExp( "^" + name, "i") },
+      { name: new RegExp("^" + name, "i") },
       { description: new RegExp(description, "i") },
     ];
   } else {
     if (name) filter.name = new RegExp("^" + name, "i");
     if (description) filter.description = new RegExp(description, "i");
+  }
+
+  if (priceMin && priceMax) {
+    filter.$and = [
+        {
+          price: {
+            $gt: priceMin,
+          },
+        },
+        {
+          price: {
+            $lte: priceMax,
+          },
+        },
+    ]
   }
 
   if (status) filter.status = status;

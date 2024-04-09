@@ -79,7 +79,7 @@ app.post(
 app.delete("/api/advert/:id", validateToken, advertController.delete);
 app.put("/api/advert/:id", validateToken, advertController.put);
 // TAGS
-app.get("/api/tags", validateToken, tagsController.get);
+app.get("/api/tags", tagsController.get);
 //=========== CATCH 404 =============
 app.use(function (req, res, next) {
   next(createError(404));
