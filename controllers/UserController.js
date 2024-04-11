@@ -3,6 +3,7 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 const createError = require("http-errors");
+const Advert = require("../models/advert");
 
 class UserController {
   async create(req, res, next) {
@@ -127,6 +128,34 @@ class UserController {
     } catch (error) {
       next(createError(404, "User not found"));
     }
+  }
+
+  async addFavorite(req, res, next) {
+    const userId = req.userId.userId;
+    const { advertId } = req.params;
+    let advert = {}
+    
+    try {
+      advert = await Advert.findById(advertId);
+    } catch (error) {
+      next(createError(404, 'Advert not found'));
+      return
+    }
+
+    const user = await User.findById({ _id: userId });
+    let { favorites: userFavorites } = user;
+    !userFavorites.includes(advert._id)
+      ? userFavorites.push(advert._id)
+      : userFavorites.pop(advert._id);
+
+    try {
+      await User.findOneAndUpdate({_id: user._id}, {favorites: userFavorites}, {new: true})
+      res.sendStatus(200)
+      
+    } catch (error) {
+      next(createError(500, 'Error trying to add favorite'))
+    }
+    
   }
 }
 
