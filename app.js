@@ -63,6 +63,7 @@ app.post("/api/register", userController.create);
 app.post("/api/login", userController.login);
 app.get("/api/get-user", userController.getUser);
 app.get("/api/get-user/:userId", userController.getUser);
+app.post("/api/user/favorite/:advertId",validateToken, userController.addFavorite);
 //Password Reset
 app.post('/api/passwordresetrequest', PasswordResetRequest);
 app.post('/api/passwordreset/:token', Passwordreset);
