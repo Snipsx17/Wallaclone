@@ -22,8 +22,6 @@ router.post('/api/contactvendor', async (req, res) => {
 
         const buyerEmail = user.email;
 
-        const responder = buyerEmail;
-
         // Find the advert by ID
         const advert = await Advert.findById(advertId);
 
