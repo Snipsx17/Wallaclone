@@ -11,7 +11,8 @@ const app = express();
 const multer = require("multer");
 const PasswordResetRequest = require("./microservices/passwordresetrequest");
 const Passwordreset = require("./routes/passwordreset");
-const contactVendor = require('./routes/contactvendor')
+const contactVendor = require('./routes/contactvendor');
+const PasswordUpdate = require('./routes/passwordupdate');
 
 
 // CONFIG
@@ -26,6 +27,7 @@ const validateToken = require("./middleware/validatetoken");
 const AdvertController = require("./controllers/AdvertController");
 const UserController = require("./controllers/UserController");
 const TagsController = require("./controllers/TagsController");
+
 
 // DB CONNECTION
 require("./lib/connect-mongoose");
@@ -65,7 +67,11 @@ app.post("/api/login", userController.login);
 app.get("/api/get-user", userController.getUser);
 app.get("/api/get-user/:userId", userController.getUser);
 app.post("/api/user/favorite/:advertId",validateToken, userController.addFavorite);
-//Password Reset
+// DELETE USER
+app.post("/api/deleteuser", validateToken, userController.deleteUser);
+// UPDATE PASSWORD
+app.post('/api/passwordupdate', validateToken, PasswordUpdate);
+// PASSWORD RESET
 app.post('/api/passwordresetrequest', PasswordResetRequest);
 app.post('/api/passwordreset/:token', Passwordreset);
 // ADVERTS

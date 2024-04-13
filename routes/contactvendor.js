@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 const Advert = require('../models/advert');
 const emailService = require('../microservices/emailService');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 // Endpoint for sending emails from buyer to ad owner

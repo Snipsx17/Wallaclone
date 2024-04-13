@@ -157,6 +157,24 @@ class UserController {
     }
     
   }
-}
 
+async deleteUser(req, res, next) {
+  const {username} = req.body;
+
+  try {
+    const user = await User.findOne({username});
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    await User.findOneAndDelete({username});
+    
+    res.json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+  }
+}
 module.exports = UserController;
