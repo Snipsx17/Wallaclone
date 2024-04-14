@@ -137,6 +137,8 @@ class UserController {
     
     try {
       advert = await Advert.findById(advertId);
+      if(!advert) throw new Error;
+
     } catch (error) {
       next(createError(404, 'Advert not found'));
       return
@@ -144,13 +146,16 @@ class UserController {
 
     const user = await User.findById({ _id: userId });
     let { favorites: userFavorites } = user;
-    !userFavorites.includes(advert._id)
-      ? userFavorites.push(advert._id)
-      : userFavorites.pop(advert._id);
 
+    if(!userFavorites.includes(advert._id)){
+      userFavorites.push(String(advert._id))
+    }else{
+      userFavorites = userFavorites.filter( element => element !== String(advert._id) );
+    }
+    
     try {
       await User.findOneAndUpdate({_id: user._id}, {favorites: userFavorites}, {new: true})
-      res.sendStatus(200)
+      res.sendStatus(200);
       
     } catch (error) {
       next(createError(500, 'Error trying to add favorite'))
