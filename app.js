@@ -11,9 +11,9 @@ const app = express();
 const multer = require("multer");
 const PasswordResetRequest = require("./microservices/passwordresetrequest");
 const Passwordreset = require("./routes/passwordreset");
-const contactVendor = require('./routes/contactvendor');
-const PasswordUpdate = require('./routes/passwordupdate');
-
+const contactVendor = require("./routes/contactvendor");
+const PasswordUpdate = require("./routes/passwordupdate");
+const swaggerMiddelware = require('./middleware/swaggerMiddelware');
 
 // CONFIG
 const passportconfig = require("./config/passport-config");
@@ -28,7 +28,6 @@ const AdvertController = require("./controllers/AdvertController");
 const UserController = require("./controllers/UserController");
 const TagsController = require("./controllers/TagsController");
 
-
 // DB CONNECTION
 require("./lib/connect-mongoose");
 
@@ -40,6 +39,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+//SWAGGER
+app.use('/api-doc', swaggerMiddelware);
 
 // CORS
 app.use((req, res, next) => {
@@ -66,14 +68,18 @@ app.post("/api/register", userController.create);
 app.post("/api/login", userController.login);
 app.get("/api/get-user", userController.getUser);
 app.get("/api/get-user/:userId", userController.getUser);
-app.post("/api/user/favorite/:advertId",validateToken, userController.addFavorite);
+app.post(
+  "/api/user/favorite/:advertId",
+  validateToken,
+  userController.addFavorite
+);
 // DELETE USER
 app.post("/api/deleteuser", validateToken, userController.deleteUser);
 // UPDATE PASSWORD
-app.post('/api/passwordupdate', validateToken, PasswordUpdate);
+app.post("/api/passwordupdate", validateToken, PasswordUpdate);
 // PASSWORD RESET
-app.post('/api/passwordresetrequest', PasswordResetRequest);
-app.post('/api/passwordreset/:token', Passwordreset);
+app.post("/api/passwordresetrequest", PasswordResetRequest);
+app.post("/api/passwordreset/:token", Passwordreset);
 // ADVERTS
 app.get("/api/adverts", advertController.get);
 app.get("/api/adverts-user", validateToken, advertController.getAdvertsUser);
@@ -90,6 +96,7 @@ app.put("/api/advert/:id", validateToken, advertController.put);
 app.post("/api/contactvendor", validateToken, contactVendor);
 // TAGS
 app.get("/api/tags", tagsController.get);
+
 //=========== CATCH 404 =============
 app.use(function (req, res, next) {
   next(createError(404));
